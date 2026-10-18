@@ -1,0 +1,25 @@
+# Secrets and credentials
+.env
+*.env
+*.pem
+*.key
+
+# Playwright & Screenshots
+*.png
+*.jpeg
+*.jpg
+*.pdf
+test-results/
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Local databases and logs
+*.log
+purchases.json
+settings.json
