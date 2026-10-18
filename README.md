@@ -64,5 +64,38 @@ HEADLESS_MODE=true
 ## 🚀 Telegram Commands
 
 * `/check` - Check the current live jackpot immediately.
+* `/threshold` - Change target jackpot cutoff (e.g. `/threshold 3m`).
+* `/status` - Bot health, schedule & draw status.
+* `/history` - View past purchases.
 * `/test`  - Trigger an instant test alert with QuickPick / System 7 buttons.
 * `/cancel`- Cancel any pending login / OTP purchase session.
+
+---
+
+## ☁️ Google Cloud Free Tier Deployment (e2-micro)
+
+1. **Create Free VM** in GCP Console (`Compute Engine` -> `VM instances`):
+   * **Name**: `totobot`
+   * **Region**: `us-central1` (Iowa), `us-east1`, or `us-west1` (Always Free eligible)
+   * **Machine type**: `e2-micro` (2 vCPU, 1 GB memory)
+   * **Boot disk**: Ubuntu 24.04 LTS, 20 GB Standard persistent disk
+
+2. **SSH into the VM** and run:
+   ```bash
+   git clone https://github.com/kevinseow/lottery_buyer.git
+   cd lottery_buyer
+   chmod +x setup_gcp_vm.sh
+   ./setup_gcp_vm.sh
+   ```
+
+3. **Configure your credentials**:
+   ```bash
+   nano .env
+   ```
+   Paste your `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `SGPOOLS_USERNAME`, and `SGPOOLS_PASSWORD`.
+
+4. **Start the 24/7 background service**:
+   ```bash
+   sudo systemctl start totobot
+   sudo journalctl -u totobot -f
+   ```
